@@ -30,10 +30,10 @@ $bdd=fonction_connection();
      echo "<img src=\"".$produit['Image']."\" alt=\"\" />";
      	 echo "<p>";
      echo "<strong>".$produit['Label']."</strong>";
-	 echo "<strong>".$produit['Origin']."</strong>";
-	 echo "<strong>".$produit['Price']."</strong>";
+	 //echo "<strong>".$produit['Origin']."</strong>";
+	 //echo "<strong>".$produit['Price']."</strong>";
 	 echo "</p>";
-	 echo "<p>".$produit['Category']."</p>";
+	 //echo "<p>".$produit['Category']."</p>";
      echo "</a>";  
      echo "</li>";
 }
