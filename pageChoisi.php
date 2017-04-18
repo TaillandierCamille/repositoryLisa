@@ -19,7 +19,7 @@ include_once "fonctions.php";
 $bdd=fonction_connection();
 
  $pag=$_GET['page'];
- $requete ='SELECT Label, Image, Category, Price, Origin  FROM `product` INNER JOIN zone on product.IdZone = zone.Identifier INNER JOIN page_zone on zone.Identifier = page_zone.IdZone WHERE IdPage ="'.$pag.'";';
+ $requete ='SELECT Label, Image, Category, Price, Origin  FROM `product` WHERE IdPage ="'.$pag.'";';
  $reponse = $bdd->query($requete);
  $produit_array= $reponse->fetchAll();
  

@@ -1,14 +1,25 @@
-
+-- phpMyAdmin SQL Dump
+-- version 4.6.4
+-- https://www.phpmyadmin.net/
+--
+-- Client :  127.0.0.1
+-- Généré le :  Jeu 13 Avril 2017 à 12:32
+-- Version du serveur :  5.7.14
+-- Version de PHP :  5.6.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
 -- Base de données :  `lisa`
 --
-CREATE DATABASE lisa CHARACTER SET 'utf8';
-USE lisa;
+
 -- --------------------------------------------------------
 
 --
@@ -102,17 +113,6 @@ CREATE TABLE `page` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `page_zone`
---
-
-CREATE TABLE `page_zone` (
-  `IdPage` int(10) UNSIGNED NOT NULL,
-  `IdZone` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `product`
 --
 
@@ -123,23 +123,14 @@ CREATE TABLE `product` (
   `Description` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `Category` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `Price` float UNSIGNED DEFAULT NULL,
-  `Price_before_coupon` float UNSIGNED DEFAULT NULL,
-  `Price_crossed` float UNSIGNED DEFAULT NULL,
   `Reduction_euro` float UNSIGNED DEFAULT NULL,
-  `Reduction_percent` float UNSIGNED DEFAULT NULL,
-  `Advantage_euro` float UNSIGNED DEFAULT NULL,
   `Advantage_percent` float UNSIGNED DEFAULT NULL,
   `Ecotaxe` float UNSIGNED DEFAULT NULL,
   `Image` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Picto` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `Origin` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `Mention` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `Packaging` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Lowerprice` float UNSIGNED DEFAULT NULL,
-  `Color` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Start_validity_date` date DEFAULT NULL,
-  `End_validity_date` date DEFAULT NULL,
-  `IdZone` int(10) UNSIGNED NOT NULL
+  `IdPage` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -178,34 +169,6 @@ CREATE TABLE `shop` (
 CREATE TABLE `shop_serviceprovidor` (
   `IdShop` int(11) UNSIGNED NOT NULL,
   `IdServiceProvidor` int(11) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `xml`
---
-
-CREATE TABLE `xml` (
-  `Identifier` int(10) UNSIGNED NOT NULL,
-  `Nom` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Lien` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Description` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `zone`
---
-
-CREATE TABLE `zone` (
-  `Identifier` int(10) UNSIGNED NOT NULL,
-  `Zone` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `CoordX` int(10) UNSIGNED DEFAULT NULL,
-  `CoordY` int(10) UNSIGNED DEFAULT NULL,
-  `Width` int(10) UNSIGNED DEFAULT NULL,
-  `Height` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -263,19 +226,11 @@ ALTER TABLE `page`
   ADD KEY `IdCatalog` (`IdCatalog`);
 
 --
--- Index pour la table `page_zone`
---
-ALTER TABLE `page_zone`
-  ADD PRIMARY KEY (`IdPage`,`IdZone`),
-  ADD KEY `IdZone` (`IdZone`),
-  ADD KEY `IdPage` (`IdPage`);
-
---
 -- Index pour la table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`Identifier`),
-  ADD KEY `IdZone` (`IdZone`);
+  ADD KEY `index_product` (`IdPage`);
 
 --
 -- Index pour la table `serviceprovidor`
@@ -297,18 +252,6 @@ ALTER TABLE `shop_serviceprovidor`
   ADD PRIMARY KEY (`IdShop`,`IdServiceProvidor`),
   ADD KEY `IdServiceProvidor` (`IdServiceProvidor`),
   ADD KEY `IdShop` (`IdShop`);
-
---
--- Index pour la table `xml`
---
-ALTER TABLE `xml`
-  ADD PRIMARY KEY (`Identifier`);
-
---
--- Index pour la table `zone`
---
-ALTER TABLE `zone`
-  ADD PRIMARY KEY (`Identifier`);
 
 --
 -- AUTO_INCREMENT pour les tables exportées
@@ -360,16 +303,6 @@ ALTER TABLE `serviceprovidor`
 ALTER TABLE `shop`
   MODIFY `Identifier` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `xml`
---
-ALTER TABLE `xml`
-  MODIFY `Identifier` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `zone`
---
-ALTER TABLE `zone`
-  MODIFY `Identifier` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
---
 -- Contraintes pour les tables exportées
 --
 
@@ -392,19 +325,12 @@ ALTER TABLE `catalog_shop`
 --
 ALTER TABLE `page`
   ADD CONSTRAINT `fk_Page_Catalog` FOREIGN KEY (`IdCatalog`) REFERENCES `catalog` (`Identifier`);
-
---
--- Contraintes pour la table `page_zone`
---
-ALTER TABLE `page_zone`
-  ADD CONSTRAINT `fk_Pagezone_Page` FOREIGN KEY (`IdPage`) REFERENCES `page` (`Identifier`),
-  ADD CONSTRAINT `fk_Pagezone_Zone` FOREIGN KEY (`IdZone`) REFERENCES `zone` (`Identifier`);
-
---
+  
+  --
 -- Contraintes pour la table `product`
 --
 ALTER TABLE `product`
-  ADD CONSTRAINT `fk_Product_Zone` FOREIGN KEY (`IdZone`) REFERENCES `zone` (`Identifier`);
+  ADD CONSTRAINT `fk_Product_Page` FOREIGN KEY (`IdPage`) REFERENCES `page` (`Identifier`);
 
 --
 -- Contraintes pour la table `shop`
@@ -419,4 +345,6 @@ ALTER TABLE `shop_serviceprovidor`
   ADD CONSTRAINT `fk_ShopServiceProvidor` FOREIGN KEY (`IdServiceProvidor`) REFERENCES `serviceprovidor` (`Identifier`),
   ADD CONSTRAINT `fk_ShopServiceProvidor_Shop` FOREIGN KEY (`IdShop`) REFERENCES `shop` (`Identifier`);
 
-
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
