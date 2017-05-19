@@ -81,6 +81,10 @@ header {
     line-height: 1;
     margin: 0; }
 
+section{
+	padding-bottom:10em;
+}
+
 .catalogueP {
 	
  color: #09070A;
@@ -106,7 +110,7 @@ header {
 	
 footer {
   text-align: center;
-	background: #09070A;
+  background: #09070A;
   padding: 2em 1em 2em;
   width: 100%;
   -webkit-box-sizing: border-box;
@@ -186,12 +190,10 @@ ul li a img{
 	 height:200px;
 	 z-index:20;
      transition-property:width,height,z-index;
-     transition-duration:0.4s;
+     transition-duration:0.2s;
 }
           
 ul li a:hover img{
      width:400px;height:400px;
      z-index:100;
 }
-	
-	

@@ -18,7 +18,7 @@ echo "<center><a class=\"a1\" href=\"Visio.php\">LISA</a></center>";
 include_once "fonctions.php";
 $bdd=fonction_connection();
 
-$requete = 'SELECT Identifier, Type, Label FROM catalog';
+$requete = 'SELECT catalog.Identifier, catalog.Type, catalog.Label, MIN(product.Image) AS Image FROM catalog INNER JOIN page ON catalog.Identifier = page.IdCatalog INNER JOIN product ON page.Identifier = product.IdPage GROUP BY catalog.Identifier, catalog.Type, catalog.Label';
 $reponse = $bdd->query($requete);
 $catalog_array= $reponse->fetchAll();
 
@@ -33,7 +33,9 @@ foreach($catalog_array as $catalog){
 	 echo " : ";
      echo $catalog['Label'];
 	 echo "<br>";
+	 echo "<img src=\"".$catalog['Image']."\" alt=\"\" />";
 	 echo "</p>";
+
 }
 ?>
 

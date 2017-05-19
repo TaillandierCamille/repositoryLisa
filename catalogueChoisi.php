@@ -5,7 +5,7 @@
 <?php
 include_once "meta.php";
 meta();
-echo "<center><a class=\"a1\" href=\"catalogueChoisi.php\">LISA</a></center>";
+echo "<center><a class=\"a1\" href=\"Visio.php\">LISA</a></center>";
 ?>
 </head>
  <body> 
@@ -23,7 +23,7 @@ include_once "fonctions.php";
 $bdd=fonction_connection();
 
  $cat=$_GET['catalog'];
- $requete ='SELECT Identifier FROM page WHERE idCatalog ="'.$cat.'";';
+ $requete ='SELECT Number, Identifier FROM page WHERE idCatalog ="'.$cat.'";';
  $reponse = $bdd->query($requete);
  $page_array= $reponse->fetchAll();
  
@@ -31,7 +31,7 @@ $bdd=fonction_connection();
 	 echo "<p>";
      echo "<a class=\"a2\" href=\"pageChoisi.php?page=",$page['Identifier'],"\">";
 	 echo "Page n°";
-	 echo $page['Identifier'];
+	 echo $page['Number'];
 	 echo "</a>";
 	 echo "<br>";
 	 echo "</p>";

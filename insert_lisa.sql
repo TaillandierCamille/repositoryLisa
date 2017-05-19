@@ -9,6 +9,15 @@ USE lisa;
 INSERT INTO `agence` (`Identifier`, `Libelle`) VALUES
 (1, 'lisa1');
 
+
+
+--
+-- Contenu de la table `operation`
+--
+
+INSERT INTO `operation` (`Identifier`, `Code`, `Title`, `StartDate`, `EndDate`) VALUES
+(1, 'OP120', '30% d\'avantages clients sur de nombreux produits', NULL, NULL);
+
 --
 -- Contenu de la table `catalog`
 --
@@ -19,14 +28,6 @@ INSERT INTO `catalog` (`Identifier`, `Type`, `Label`, `Speed`, `CatalogWidth`, `
 (3, 'fiches_produits de bain', 'OP126', NULL, NULL, NULL, 1, 1),
 (4, 'fiches_produits de lit', 'OP129', NULL, NULL, NULL, 1, 1),
 (5, 'fiches_produits noir', 'OP130', NULL, NULL, NULL, 1, 1);
-
---
--- Contenu de la table `operation`
---
-
-INSERT INTO `operation` (`Identifier`, `Code`, `Title`, `StartDate`, `EndDate`) VALUES
-(1, 'OP120', '30% d\'avantages clients sur de nombreux produits', NULL, NULL);
-
 --
 -- Contenu de la table `page`
 --

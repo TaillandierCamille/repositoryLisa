@@ -1,7 +1,7 @@
 <?php
 include_once "meta.php";
 meta();
-echo "<center><a class=\"a1\" href=\"catalogueChoisi.php\">LISA</a></center>";
+echo "<center><a class=\"a1\" href=\"Visio.php\">LISA</a></center>";
 ?>
 </head>
  <body> 
@@ -13,6 +13,7 @@ echo "<center><a class=\"a1\" href=\"catalogueChoisi.php\">LISA</a></center>";
  <section class=\"catalogues\">
  <article>
  <h3> Pages du catalogue  </h3>
+ <p>cliquer pour avoir les détails</p>
  
 <?php
 include_once "fonctions.php";
@@ -28,12 +29,9 @@ $bdd=fonction_connection();
 	 echo "<li>";
      echo "<a href=\"#\">";
      echo "<img src=\"".$produit['Image']."\" alt=\"\" />";
-     	 echo "<p>";
-     echo "<strong>".$produit['Label']."</strong>";
-	 //echo "<strong>".$produit['Origin']."</strong>";
-	 //echo "<strong>".$produit['Price']."</strong>";
+	 echo "<p></br></p>";
+     echo "<p>";
 	 echo "</p>";
-	 //echo "<p>".$produit['Category']."</p>";
      echo "</a>";  
      echo "</li>";
 }
