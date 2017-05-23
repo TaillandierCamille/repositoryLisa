@@ -23,7 +23,7 @@ include_once "fonctions.php";
 $bdd=fonction_connection();
 
  $cat=$_GET['catalog'];
- $requete ='SELECT Number, Identifier FROM page WHERE idCatalog ="'.$cat.'";';
+ $requete ='SELECT page.Number, page.Identifier, MIN(product.Image) AS Image FROM page INNER JOIN product ON page.Identifier = product.IdPage WHERE idCatalog ="'.$cat.'" GROUP BY page.Number, page.Identifier;';
  $reponse = $bdd->query($requete);
  $page_array= $reponse->fetchAll();
  
@@ -34,6 +34,9 @@ $bdd=fonction_connection();
 	 echo $page['Number'];
 	 echo "</a>";
 	 echo "<br>";
+	 echo "<center><div class=\"ImageRonde\">";
+	 echo "<a class=\"a2\" href=\"pageChoisi.php?page=",$page['Identifier'],"\"><img class=\"im\" src=\"".$page['Image']."\" alt=\"\" /></a>";
+	 echo "</div></center>";
 	 echo "</p>";
 }
  

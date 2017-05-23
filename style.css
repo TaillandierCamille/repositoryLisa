@@ -106,7 +106,26 @@ section{
   
   }
   
+ 
+.ImageRonde {
+	overflow:hidden;
+	-webkit-border-radius:50px;
+	-moz-border-radius: 50%;
+	border-radius:50px;
+	width:100px;
+	height:105px;
+	border: 1px solid black;
+	background:black;
+}
 
+.im {
+	width:100px;
+	height:100px;
+}
+
+.Category_product {
+	font-size:20px;
+}
 	
 footer {
   text-align: center;

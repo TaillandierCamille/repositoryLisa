@@ -33,7 +33,9 @@ foreach($catalog_array as $catalog){
 	 echo " : ";
      echo $catalog['Label'];
 	 echo "<br>";
-	 echo "<img src=\"".$catalog['Image']."\" alt=\"\" />";
+	 echo "<center><div class=\"ImageRonde\">";
+	 echo "<a class=\"a2\" href=\"catalogueChoisi.php?catalog=",$catalog['Identifier'],"\"><img class=\"im\" src=\"".$catalog['Image']."\" alt=\"\" /></a>";
+	 echo "</div></center>";
 	 echo "</p>";
 
 }
@@ -44,7 +46,7 @@ foreach($catalog_array as $catalog){
  </section>
  <footer>
  <p class="whiteP">Merci de votre visite.</p>
- <p class="whiteP">© 2017 - VisionneuseLisa.fr </p>
+ <p class="whiteP">© 2017 - Visio.lan </p>
  </footer>
  </body>
 </html>
